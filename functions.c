@@ -47,3 +47,12 @@ int** build_task_matrix(int* parameters, int number_of_tasks){
     return matrix;
 }
 
+int search_bigger_time(int** matriz_of_parameters, int n_tasks){
+    int bigger = 0;
+    for (int i = 0; i < n_tasks; i++){
+        if (matriz_of_parameters[i][3] > bigger){
+            bigger = matriz_of_parameters[i][3];
+        }
+    }
+    return bigger;
+}

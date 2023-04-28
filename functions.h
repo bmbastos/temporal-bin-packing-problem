@@ -11,3 +11,6 @@ int** build_task_matrix(int* parameters, int number_of_tasks);
 *  a primeira coluna representa o índice da tarefa, a segunda representa o tempo de início, a terceira representa o tempo de fim
 *  e por último, a quarta que representa a quantidade de cores que a tarefa exige. */
 
+int search_bigger_time(int** matriz_of_parameters, int n_tasks);
+/* Procura o maior tempo na matriz de parametros */
+
