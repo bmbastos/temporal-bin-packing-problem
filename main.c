@@ -16,7 +16,9 @@ int main(int argc, char const *argv[])
 
     matrix_of_tasks = build_task_matrix(vector_of_parameters, n_tasks);
     free(vector_of_parameters);
-
+    Solution initial_solution = build_initial_solution(n_tasks);
+    printf("Jobs: %d = Valor: %d\n", n_tasks, initial_solution.value);
+    print_solution_matrix(initial_solution, n_tasks);
 
 
     return 0;

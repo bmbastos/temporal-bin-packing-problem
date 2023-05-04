@@ -47,12 +47,68 @@ int** build_task_matrix(int* parameters, int number_of_tasks){
     return matrix;
 }
 
-int search_bigger_time(int** matriz_of_parameters, int n_tasks){
+int search_bigger_time(int** matriz_of_parameters, int number_of_tasks){
     int bigger = 0;
-    for (int i = 0; i < n_tasks; i++){
+    for (int i = 0; i < number_of_tasks; i++){
         if (matriz_of_parameters[i][3] > bigger){
-            bigger = matriz_of_parameters[i][3];
+            bigger = matriz_of_parameters[i][2];
         }
     }
     return bigger;
+}
+
+unsigned char** create_solution_matrix(int number_of_tasks){
+    int i = 0;
+    unsigned char** matrix;
+    matrix = (unsigned char **) calloc(number_of_tasks, sizeof(unsigned char *));
+    for (i = 0; i < number_of_tasks; i++){
+        matrix[i] = (unsigned char *) calloc(number_of_tasks, sizeof(unsigned char));
+    }
+    for (i = 0; i < number_of_tasks; i++){
+        matrix[i][i] = 1;
+    }
+    return matrix;
+}
+
+void print_solution_matrix(Solution solution, int number_of_tasks){
+    int i = 0, j = 0;
+    printf("    +");
+    for (i = 0; i < number_of_tasks * 2 + 1; i++)
+    {
+        printf("-");
+    }
+    printf("+\n");
+    for (i = 0; i < number_of_tasks; i++){
+        printf("%.3d | ", i);
+        for (j = 0; j < number_of_tasks; j++){
+            printf("%hhu ", solution.matrix[i][j]);
+        }
+        printf("|\n");
+    }
+    printf("    +");
+    for (i = 0; i < number_of_tasks * 2 + 1; i++)
+    {
+        printf("-");
+    }
+    printf("+\n");
+}
+
+int calculate_solution_value(Solution solution, int number_of_tasks){
+    int value = 0;
+    for (int i = 0; i < number_of_tasks; i++){
+        for (int j = 0; j < number_of_tasks; j++){
+            if (solution.matrix[i][j] == 1){
+                value++;
+                break;
+            }
+        }
+    }
+    return value;
+}
+
+Solution build_initial_solution(int number_of_tasks){
+    Solution s;
+    s.matrix = create_solution_matrix(number_of_tasks);
+    s.value = calculate_solution_value(s, number_of_tasks);
+    return s;
 }
