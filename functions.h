@@ -9,10 +9,10 @@ typedef struct {
 } Solution;
 /* Representação de uma solução. */
 
-typedef struct {
+typedef struct List {
     Solution solution;
-    TabuList* next;
-} TabuList;
+    struct List* next;
+} List;
 /* Representação da lista tabu. */
 
 int* get_data_from_file(char* file_name);
@@ -39,4 +39,11 @@ int calculate_solution_value(Solution solution, int number_of_tasks);
 Solution build_initial_solution(int number_of_tasks);
 /* Constrói a solução inicial. */
 
+List* initialize_list();
+/* Inicializa a lista. */
 
+int is_empty_list(List* list);
+/* Verifica se a lista é vazia. */
+
+List* insert_solution_in_list(Solution solution, List* list);
+/* Insere um novo elemento na lista. A inserção é feita no final da lista. */

@@ -112,3 +112,35 @@ Solution build_initial_solution(int number_of_tasks){
     s.value = calculate_solution_value(s, number_of_tasks);
     return s;
 }
+
+List* initialize_list(){
+    List* list = NULL;
+    return list;
+}
+
+int is_empty_list(List* list){
+    int resp = 0;
+    if (list == NULL){
+        resp = 1;
+    }
+    return resp;
+}
+
+List* insert_solution_in_list(Solution solution, List* list){
+    List* new_element = (List*) malloc(sizeof(List));
+    new_element->solution.matrix = solution.matrix;
+    new_element->solution.value = solution.value;
+    new_element->next = NULL;
+
+    if (is_empty_list(list)) {
+        list = new_element;
+    }
+    else {
+        List* current = list;
+        while (current->next != NULL) {
+            current = (List*) current->next;
+        }
+        current->next = (struct List*) new_element;
+    }
+    return list;
+}
